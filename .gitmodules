@@ -1,0 +1,12 @@
+[submodule "drivers/STM32F4xx_HAL_Driver"]
+	path = drivers/STM32F4xx_HAL_Driver
+	url = https://github.com/STMicroelectronics/stm32f4xx_hal_driver.git
+[submodule "drivers/CMSIS/Device/ST/STM32F4xx"]
+	path = drivers/CMSIS/Device/ST/STM32F4xx
+	url = https://github.com/STMicroelectronics/cmsis_device_f4.git
+[submodule "drivers/CMSIS/CMSIS_5"]
+	path = drivers/CMSIS/CMSIS_5
+	url = https://github.com/ARM-software/CMSIS_5.git
+[submodule "drivers/FreeRTOS"]
+	path = drivers/FreeRTOS
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git

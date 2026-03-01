@@ -1,0 +1,2 @@
+// STM32F407VG CubeSat platform
+using "platforms/cpus/stm32f4.repl"

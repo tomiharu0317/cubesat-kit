@@ -1,0 +1,54 @@
+---
+:project:
+  :build_root: build/test
+  :use_exceptions: FALSE
+  :use_test_preprocessor: :all
+  :test_file_prefix: test_
+
+:paths:
+  :test:
+    - test/**
+  :source:
+    - src/subsystems/**
+    - src/app/**
+  :include:
+    - src/hal/**
+    - src/subsystems/**
+    - src/app/**
+  :support:
+    - test/support/**
+
+:defines:
+  :common: &common_defines
+    - UNIT_TEST
+  :test:
+    - *common_defines
+
+:cmock:
+  :mock_prefix: mock_
+  :when_no_prototypes: :warn
+  :enforce_strict_ordering: TRUE
+  :plugins:
+    - :ignore
+    - :callback
+    - :return_thru_ptr
+    - :expect_any_args
+    - :array
+  :treat_as:
+    uint8: HEX8
+    uint16: HEX16
+    uint32: UINT32
+    int8: INT8
+    int16: INT16
+    int32: INT32
+
+:plugins:
+  :enabled:
+    - gcov
+
+:gcov:
+  :utilities:
+    - gcovr
+  :reports:
+    - HtmlDetailed
+    - Text

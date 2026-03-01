@@ -1,0 +1,53 @@
+#include "hal_i2c.h"
+#include "stm32f4xx_hal.h"
+
+#define I2C_TIMEOUT_MS 100
+
+static I2C_HandleTypeDef hi2c1;
+
+hal_i2c_status_t hal_i2c_init(void)
+{
+    hi2c1.Instance             = I2C1;
+    hi2c1.Init.ClockSpeed      = 100000;
+    hi2c1.Init.DutyCycle       = I2C_DUTYCYCLE_2;
+    hi2c1.Init.OwnAddress1     = 0;
+    hi2c1.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
+    hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    hi2c1.Init.NoStretchMode   = I2C_NOSTRETCH_DISABLE;
+
+    if (HAL_I2C_Init(&hi2c1) != HAL_OK) {
+        return HAL_I2C_ERROR;
+    }
+    return HAL_I2C_OK;
+}
+
+hal_i2c_status_t hal_i2c_read_reg(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, size_t len)
+{
+    HAL_StatusTypeDef status;
+    status = HAL_I2C_Mem_Read(&hi2c1, (uint16_t)(dev_addr << 1), reg_addr,
+                              I2C_MEMADD_SIZE_8BIT, data, (uint16_t)len,
+                              I2C_TIMEOUT_MS);
+    if (status == HAL_TIMEOUT) {
+        return HAL_I2C_TIMEOUT;
+    }
+    if (status != HAL_OK) {
+        return HAL_I2C_ERROR;
+    }
+    return HAL_I2C_OK;
+}
+
+hal_i2c_status_t hal_i2c_write_reg(uint8_t dev_addr, uint8_t reg_addr, const uint8_t *data, size_t len)
+{
+    HAL_StatusTypeDef status;
+    status = HAL_I2C_Mem_Write(&hi2c1, (uint16_t)(dev_addr << 1), reg_addr,
+                               I2C_MEMADD_SIZE_8BIT, (uint8_t *)data, (uint16_t)len,
+                               I2C_TIMEOUT_MS);
+    if (status == HAL_TIMEOUT) {
+        return HAL_I2C_TIMEOUT;
+    }
+    if (status != HAL_OK) {
+        return HAL_I2C_ERROR;
+    }
+    return HAL_I2C_OK;
+}

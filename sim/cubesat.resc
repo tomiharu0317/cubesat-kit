@@ -1,0 +1,14 @@
+# CubeSat SITL Script
+using sysbus
+
+mach create "CubeSat"
+machine LoadPlatformDescription @sim/cubesat.repl
+
+sysbus LoadELF @build/cubesat-kit.elf
+
+showAnalyzer sysbus.usart2
+
+# Log UART output to file for Robot Framework
+sysbus.usart2 CreateFileBackend @/tmp/cubesat_uart.log true
+
+start
