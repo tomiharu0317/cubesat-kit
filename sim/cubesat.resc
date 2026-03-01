@@ -1,14 +1,13 @@
-# CubeSat SITL Script
+# CubeSat SITL Script (interactive use)
+# Run with: renode sim/cubesat.resc
+
 using sysbus
 
 mach create "CubeSat"
-machine LoadPlatformDescription @sim/cubesat.repl
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
 
 sysbus LoadELF @build/cubesat-kit.elf
 
 showAnalyzer sysbus.usart2
-
-# Log UART output to file for Robot Framework
-sysbus.usart2 CreateFileBackend @/tmp/cubesat_uart.log true
 
 start

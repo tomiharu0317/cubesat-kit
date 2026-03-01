@@ -80,6 +80,7 @@ jobs:
             --suppress=staticFunction \
             --suppress=knownConditionTrueFalse \
             --suppress=checkersReport \
+            --suppress=unmatchedSuppression \
             -I src/hal -I src/subsystems -I src/app \
             -I config \
             -DSTM32F407xx -DUNIT_TEST \
