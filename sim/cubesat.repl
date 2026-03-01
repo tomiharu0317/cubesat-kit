@@ -1,2 +1,4 @@
 // STM32F407VG CubeSat platform
-using "platforms/cpus/stm32f4.repl"
+// This file is for reference/customization.
+// The Robot Framework tests use the built-in stm32f4_discovery-kit.repl directly.
+using "platforms/boards/stm32f4_discovery-kit.repl"
